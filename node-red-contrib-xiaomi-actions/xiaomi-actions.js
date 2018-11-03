@@ -61,6 +61,40 @@ module.exports = (RED) => {
     }
     RED.nodes.registerType("xiaomi-actions double_click", XiaomiActionDoubleClick);
 
+
+    /*********************************************
+     Virtual long_click_press on a button
+     *********************************************/
+    function XiaomiActionLongClickPress(config) {
+        RED.nodes.createNode(this, config);
+
+        this.on('input', (msg) => {
+            msg.payload = {
+                cmd: "write",
+                data: { status: "long_click_press", sid: msg.sid }
+            };
+            this.send(msg);
+        });
+    }
+    RED.nodes.registerType("xiaomi-actions long_click_press", XiaomiActionLongClickPress);
+
+    
+    /*********************************************
+     Virtual long_click_release on a button
+     *********************************************/
+    function XiaomiActionLongClickRelease(config) {
+        RED.nodes.createNode(this, config);
+
+        this.on('input', (msg) => {
+            msg.payload = {
+                cmd: "write",
+                data: { status: "long_click_release", sid: msg.sid }
+            };
+            this.send(msg);
+        });
+    }
+    RED.nodes.registerType("xiaomi-actions long_click_release", XiaomiActionLongClickRelease);
+    
     /*********************************************
      Set the gateway light
      *********************************************/
